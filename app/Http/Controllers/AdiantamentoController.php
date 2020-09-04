@@ -21,7 +21,9 @@ class AdiantamentoController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $adiantamento = $request->all();
+
+        $insert = Adiantamentos::create($adiantamento);
     }
 
     public function show($id)
@@ -38,11 +40,15 @@ class AdiantamentoController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $dados = $request->all();
+        $adiantamento = Adiantamentos::find($id);
+        $update = $adiantamento->update($dados);
     }
 
     public function destroy($id)
     {
-        //
+        $adiantamento = Adiantamentos::find($id);
+
+        $adiantamento->delete();
     }
 }
