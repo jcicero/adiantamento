@@ -9,9 +9,9 @@ class AdiantamentoController extends Controller
 {
     public function index()
     {
-        $adiantamentos = Adiantamentos::all();
+        $adiantamentos = Adiantamentos::orderBy('data', 'desc')->get();
 
-        return response()->json(['data'=> $adiantamentos]);
+        return response()->json(['adiantamento' => $adiantamentos]);
     }
 
     public function create()
