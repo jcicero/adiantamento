@@ -16,7 +16,8 @@ class DanfeController extends Controller
         //$danfes = Danfes::with('fornecedors')->orderBy('data', 'desc')->get();
         $danfes = DB::table('danfes')
             ->join('fornecedors', 'fornecedors.id', '=', 'danfes.fornecedor_id')
-            ->select('danfes.*', 'fornecedors.*')->get();
+            ->select('danfes.*', 'fornecedors.*')
+            ->get();
 
         //dd($danfes);
         return response()->json($danfes);

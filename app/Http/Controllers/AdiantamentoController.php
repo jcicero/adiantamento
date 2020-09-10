@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Adiantamentos;
+use App\Models\Fornecedors;
 use Illuminate\Http\Request;
+use DB;
 
 class AdiantamentoController extends Controller
 {
@@ -35,7 +37,15 @@ class AdiantamentoController extends Controller
 
     public function edit($id)
     {
-        //
+        $fornecedors = Fornecedors::all();
+        //$danfes = Danfes::with('fornecedors')->orderBy('data', 'desc')->get();
+        $danfes = DB::table('danfes')
+            ->join('fornecedors', 'fornecedors.id', '=', 'danfes.fornecedor_id')
+            ->select('danfes.*', 'fornecedors.*')
+            ->where('danfes.adiantamento_id',$id)
+            ->get();
+
+        return response()->json($danfes);
     }
 
     public function update(Request $request, $id)
